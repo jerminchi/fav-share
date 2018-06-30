@@ -62,7 +62,6 @@ addToLibrary = (data)=>{ // adds the music to your array in state
     this.props.dispatchSong(data)
 }
 
-
   render() {
 
     return (
@@ -85,11 +84,14 @@ addToLibrary = (data)=>{ // adds the music to your array in state
 
                     return(
 
-                    <div className="album-info-row"
+                    <div 
+                        className="album-info-row"
                          key={i}>
-                    <img src={data.artworkUrl100}
+
+                    <img 
+                    src={data.artworkUrl100}
                     alt="Album art"
-                    className="placeholder"/>
+                    className="placeholder" />
 
                     <div className="album-info">
                     <p>Album: {data.collectionName}</p>
