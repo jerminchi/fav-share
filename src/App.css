@@ -10,97 +10,50 @@ button{
   background:transparent;
 }
 
+
 .container{
-  height:100vh;
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-
   
-}
-
-.header{
-
-  grid-column: 1/5;
-}
-
-
-p{
-  margin-bottom:0.5em;
-}
-
-.search-container{
-
-  grid-column: 2/4;
-  grid-row: 2/3;
-}
-
-input[name="search"]{
-
-  margin-top:2em;
-  width:510px;
-  height:25px;
-}
-
-.album-info-container{
-
-  margin-top:1em;
- 
-}
-
-.album-info-row{
-  display:flex;
-  flex-direction: row;
-  margin-bottom:1em;
-  max-width:70%;
-}
-
-.album-info{
-
   display:flex;
   flex-direction: column;
-  align-self: flex-start;
-  padding-left:2em;
-  
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+  background:linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1) ),
+  url(./images/riri2.jpg)  center no-repeat;
+  object-fit: cover;
+
 }
 
-.placeholder{
+.container > p{
 
-  align-self: center;
-  width:100px;
-  height:100px;
-}
-
-.add-lib-btn{
-  
-  padding-left:1em;
-  border:none;
-  align-self: center;
-}
-
-.done-btn{  
-
-  margin-top:1em;
-  border:none;    
-  background:#717171;
-  padding:0.5em 1em;        
   color:#fff;
+  font-size: 1.3em;
 }
 
-.search-hidden{
+.get-started{
 
-  display:none;
+  outline:none;
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  color:#fff;
+  background:transparent;
+  transition: padding 0.5s;
 }
 
-.library{
+.get-started:hover{
 
-  grid-column: 2/4;
-  grid-row:4/4;
+  padding: 10px 40px;
+}
 
+.main-heading{
+
+  font-size:5em;
+  color:rgb(224, 255, 24)
 }
 
 
-@media screen and (min-width:320px) {
+
+/* @media screen and (min-width:320px) {
 
   .container{
 
@@ -154,9 +107,9 @@ input[name="search"]{
     text-align: center;
   }
 
-}
+} */
 
-@media screen and (min-width:375px){
+/* @media screen and (min-width:375px){
 
   .container{
 
@@ -286,4 +239,4 @@ input[name="search"]{
 
   
   
-}
+} */

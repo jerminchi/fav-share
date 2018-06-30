@@ -1,14 +1,16 @@
 import React from 'react'
-import './collection.css'
+import './library.css'
+import Header from '../Header/Header'
 
-let maxMusic = 3;
-const Collection = ({music}) =>(
+const Collection = () =>(
 
 
             <div className="collection-container">
+
+                <Header />
                 <h1>Jermaine's Music</h1>
                 
-                    {music.slice(0,maxMusic).map((music, i)=>{ //return only the first three albums
+                    {/* {music.slice(0,maxMusic).map((music, i)=>{ //return only the first three albums
 
                         return(
 
@@ -31,7 +33,7 @@ const Collection = ({music}) =>(
                         </div>
                         )
 
-                    })}
+                    })} */}
             </div>
         
 )

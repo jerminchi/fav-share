@@ -1,9 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import 'font-awesome/css/font-awesome.min.css';
-import App from './App';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { Provider} from 'react-redux'
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk'
+import reducers from './reducers'
+
+
+import App from './App';
+import Search from './components/Search/Search'
+import Library from './components/Collection/Library'
+
+
+const store = createStore(
+    reducers,
+    window.devToolsExtension && window.devToolsExtension(),
+    applyMiddleware(thunk)
+  );
+
+
+
+
+ReactDOM.render(<Provider store={store}>
+<Router>
+    <Switch>
+    <Route  exact path="/" component={App} />
+    <Route path="/search" component={Search} />
+    <Route path="/library" component={Library} />
+
+    </Switch>
+      </Router>
+      </Provider>, 
+    document.getElementById('root'));
 registerServiceWorker();
