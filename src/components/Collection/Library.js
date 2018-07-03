@@ -46,10 +46,8 @@ class Collection extends Component{
                     <p>Album: {data.collectionName}</p>
                     <p>Artist: {data.artistName}</p>
                     <p>Year: {data.releaseDate.slice(0,4)}</p>
-
-                    <button className="add-lib-btn" //adds music info to library
-                        onClick={() =>this.addToLibrary(data)}>Add to library
-                    </button> 
+                    
+                    <a href={data.trackViewUrl} target="_blank">Preview Track</a>
 
                     </div>
 
