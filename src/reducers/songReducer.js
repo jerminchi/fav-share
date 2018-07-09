@@ -18,6 +18,13 @@ export default function songReducer(state = initialState, action){
                 data:state.data.concat(action.payload)
                 
             }
+
+            case 'GET_ALL_SONGS':
+                console.log(action)
+
+                return{
+                    ...state
+                }
             
 
             case 'DELETE_SONG':

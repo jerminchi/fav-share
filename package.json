@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "firebase": "^5.2.0",
     "font-awesome": "^4.7.0",
     "pouchdb": "^7.0.0",
     "pouchdb-authentication": "^1.1.3",

@@ -3,11 +3,9 @@ import axios from 'axios'
 
 import '../Search/search.css'
 import Header from '../Header/Header'
-import { addSong } from '../../actions/songActions'
+import { addSong } from '../../actions/index'
 
 import { connect } from 'react-redux'
-
-
 
 const URL = 'https://itunes.apple.com/search?term='
 
@@ -50,14 +48,7 @@ getMusic(music){ //get music from itunes API
 
 addToLibrary = (data)=>{ // adds the music to your array in state
 
-    // console.log(music.artistId)
-  //   console.log(music)
     
-  //  this.setState(prevState => ({
-   
-  //   musicToAdd:[...prevState.musicToAdd, music] 
-  //  }))
-  //  console.log(this.state.musicToAdd)
     console.log(data)
     this.props.dispatchSong(data)
 }

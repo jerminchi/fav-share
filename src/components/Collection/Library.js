@@ -4,6 +4,9 @@ import '../Search/search.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
+import { getSavedMusic } from '../../actions/index'
+
+
 class Collection extends Component{
 
             constructor(props){
@@ -12,12 +15,14 @@ class Collection extends Component{
                 
             }
 
+            componentDidMount(){
+
+                this.props.getAllSongs()
+            }
+
 
             render(){
-
                 const { addedSongs } = this.props 
-
-                console.log(addedSongs)
 
                 return(
 
@@ -59,30 +64,9 @@ class Collection extends Component{
 
                 </div>
                 
-                    {/* {music.slice(0,maxMusic).map((music, i)=>{ //return only the first three albums
+                    
 
-                        return(
-
-                        <div className="music-list"
-                        key={i}>    
-
-
-                            <img src={music.artworkUrl100}
-                            alt="Album art"
-                            />
-
-                                <div className="music-list-row">
-                                
-                                    <p>Album:{music.collectionName}</p>
-                                    <p>Artist:{music.artistName}</p>
-                                    <p>Year:{music.releaseDate.slice(0,4)}</p>
-
-                                </div>
-
-                        </div>
-                        )
-
-                    })} */}
+                    
             </div>
                 )
             }
@@ -97,5 +81,13 @@ class Collection extends Component{
                 }
              }
 
-export default connect (mapStateToProps) (Collection)
+             function mapDispatchToProps(dispatch){
+
+                return{
+
+                    getAllSongs: ()=> dispatch(getSavedMusic())
+                }
+             }
+
+export default connect (mapStateToProps, mapDispatchToProps)(Collection)
 
