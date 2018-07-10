@@ -1,0 +1,67 @@
+
+
+.login-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin-top:1em;
+    background:#D5F11F;
+    width:500px;
+    height:350px;
+    opacity:0.8;
+    box-shadow: 5px 10px 20px #342c00;
+}
+
+.routes{
+    align-self: center;
+    display:flex;
+    flex-direction: row;
+}
+
+.routes li{
+
+    list-style: none;
+    margin: 0 0.5em;
+    font-size:16pt;
+    color:#E43c4b;
+}
+
+form{
+
+    display:flex;
+    flex-direction:column;
+}
+
+input[name="email"], input[name="pass"], input[name="user"]{
+
+    padding: 15px 15px;
+    margin: 8px 0;
+    border-radius: 25px;
+    border: none;
+    width:250px;
+    background: rgba(19, 19, 19, 0.098);
+    align-self: center;
+    box-sizing: border-box;
+    text-indent: 40px;
+    color:#fff;
+    outline:none; 
+}
+
+input[type=submit]{
+
+    padding: 15px 15px;
+    margin:25px 0;
+    border-radius: 25px;
+    border: none;
+    width:250px;
+    align-self: center;
+    background:#E43c4b;
+    color:#ffffff;
+    box-sizing: border-box;
+    outline:none; 
+  }
+  
+  input:focus {
+    color:#ffffff;
+  }

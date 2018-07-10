@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom'
+import Login from './components/Login/Login'
 
-const App = () =>(
+class App extends Component{
 
-      <div className="container">
-      
-      <h1 className="main-heading">Share Music</h1>
-      <p>Search and share your favorite artists</p>
-      <Link to='/search'><button className="get-started">Get Started</button></Link>
+      constructor(props){
 
-      </div>
+            super(props)
+            this.state={
 
-)
+                  showModal:true,
+                 
+            }
+      }
+
+      toggleModal = ()=>{
+
+            this.setState({showModal:!this.state.showModal})
+      }
+
+      render(){
+
+            return(
+
+                  <div className="container">
+                  
+                  <h1 className="main-heading">Share Music</h1>
+                  <p>Search and share your favorite artists</p>
+                  <button 
+                  onClick={this.toggleModal}
+                  className="get-started">Get Started</button>
+                  { this.state.showModal && <Login/> }
+
+                  </div>
+
+            )
+
+      }
+
+}
 
 export default App;
