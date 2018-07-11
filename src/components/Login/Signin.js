@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { signIn } from '../../db/dbHelpers'
 import { Redirect } from 'react-router-dom'
 
 
@@ -10,7 +11,7 @@ class Signin extends Component{
 
         this.state={
 
-            email:"",
+            user:"",
             pass: "",
             redirect:false
 
@@ -27,18 +28,20 @@ class Signin extends Component{
     
         //prevent refreshing page
         e.preventDefault()
-        this.signin()
+        this.userLogIn()
     
       }
 
-      signIn= ()=>{
+      userLogIn= ()=>{
 
         //credentials for user
           let user = {
 
-            email:this.state.email,
+            name:this.state.user,
             password: this.state.pass
           }
+
+          signIn(user.name, user.password)
 
 
           this.setState({redirect:true})
@@ -63,7 +66,7 @@ class Signin extends Component{
                 <form
                   onSubmit={this.handleSubmit}>
         
-                  <input type="text" name="email" placeholder="Email" value={this.state.email}  onChange={this.handleChange}/>
+                  <input type="text" name="user" placeholder="Username" value={this.state.email}  onChange={this.handleChange}/>
         
                   <input type="password" name="pass" placeholder="Password" value={this.state.pass}  onChange={this.handleChange}/>
                   

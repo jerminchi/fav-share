@@ -1,8 +1,28 @@
 import PouchDB from 'pouchdb'
-
+import PouchAuth from 'pouchdb-authentication'
+PouchDB.plugin(PouchAuth)
 let localDB = new PouchDB('music')
 let remoteDB = new PouchDB('https://72df47ef-19bd-4aae-808f-3dd02028206b-bluemix.cloudant.com/music-db', {skip_setup: true})
 
+let userDB = new PouchDB('https://72df47ef-19bd-4aae-808f-3dd02028206b-bluemix.cloudant.com/_users', {skip_setup: true})
+
+
+
+export function signUp(username, password){
+
+    userDB.signUp(username, password)
+    .then(res => console.log('Account created for ' + JSON.stringify(res)))
+    .catch(error => console.log(error))
+
+}
+
+export function signIn(username, password){
+
+    userDB.logIn(username, password)
+    .then(res => console.log(res))
+    .catch(error => console.log(error))
+
+}
 
 //get info about dbs
 export function getDBInfo(){
@@ -13,9 +33,7 @@ export function getDBInfo(){
         console.log("Info from local database -" + info)
     })
 
-   
 }
-
 
 //sync localDB with remoteDB
 export function syncDBs(){

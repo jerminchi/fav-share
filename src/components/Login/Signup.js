@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { signUp } from '../../db/dbHelpers'
+
 class Signup extends Component{
 
     constructor(props){
@@ -8,9 +10,10 @@ class Signup extends Component{
         this.state = {
     
           user: "",
-          email:"",
           pass: ""
+
         }
+
       }
     
       handleChange = (e)=>{
@@ -23,20 +26,23 @@ class Signup extends Component{
     
         //prevent refreshing page
         e.preventDefault()
-        this.signup()
+        this.userSignUp()
     
       }
     
-      signup = ()=>{
+      userSignUp = ()=>{
     
-        let user = {  
-                        user:this.state.user,
-                        email:this.state.email,
-                        password: this.state.pass
-                      }
-             
+        let user = { 
+
+          user:this.state.user,
+          password: this.state.pass
+
+        }
+
+        signUp(user.user, user.password)
+        
     
-            }
+        }
       
       render() {
         return (
@@ -44,13 +50,13 @@ class Signup extends Component{
             <form
             onSubmit={this.handleSubmit}>
     
-            <input type="text" name="user" placeholder="Username" value={this.state.user} onChange={this.handleChange}/>
-    
-            <input type="text" name="email" placeholder="Email" value={this.state.email}  onChange={this.handleChange}/>
-    
-            <input type="password" name="pass" placeholder="Password" value={this.state.pass}  onChange={this.handleChange}/>
-            
-            <input type="submit" value="SIGN UP" />
+              <input type="text" name="user" placeholder="Username" value={this.state.user} onChange={this.handleChange}/>
+      
+              {/* <input type="text" name="email" placeholder="Email" value={this.state.email}  onChange={this.handleChange}/> */}
+      
+              <input type="password" name="pass" placeholder="Password" value={this.state.pass}  onChange={this.handleChange}/>
+              
+              <input type="submit" value="SIGN UP" />
     
             </form>
     
