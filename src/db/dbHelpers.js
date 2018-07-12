@@ -24,6 +24,13 @@ export function signIn(username, password){
 
 }
 
+export function signOut(){
+
+    remoteDB.logOut()
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
 //get info about dbs
 export function getDBInfo(){
 
@@ -65,7 +72,7 @@ export function saveMusic(music){
         "data": music
     };
 
-     localDB.post(doc)
+     userDB.post(doc)
     .then((res)=>{
 
         console.log(res)
