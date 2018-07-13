@@ -9,7 +9,7 @@ class Signup extends Component{
     
         this.state = {
     
-          user: "",
+          email: "",
           pass: ""
 
         }
@@ -34,7 +34,7 @@ class Signup extends Component{
     
         let user = { 
 
-          user:this.state.user,
+          user:this.state.email,
           password: this.state.pass
 
         }
@@ -50,7 +50,7 @@ class Signup extends Component{
             <form
             onSubmit={this.handleSubmit}>
     
-              <input type="text" name="user" placeholder="Username" value={this.state.user} onChange={this.handleChange}/>
+              <input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange}/>
       
               {/* <input type="text" name="email" placeholder="Email" value={this.state.email}  onChange={this.handleChange}/> */}
       

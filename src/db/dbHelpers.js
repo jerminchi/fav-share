@@ -1,65 +1,100 @@
-import PouchDB from 'pouchdb'
-import PouchAuth from 'pouchdb-authentication'
-PouchDB.plugin(PouchAuth)
-let localDB = new PouchDB('music')
-let remoteDB = new PouchDB('https://72df47ef-19bd-4aae-808f-3dd02028206b-bluemix.cloudant.com/music-db', {skip_setup: true})
+import firebase from 'firebase'
+import 'firebase/firestore'
 
-let userDB = new PouchDB('https://72df47ef-19bd-4aae-808f-3dd02028206b-bluemix.cloudant.com/_users', {skip_setup: true})
+/* toDo: put credentials in separate config file */
+// Initialize Firebase
+let config = {
+    apiKey: "AIzaSyD7lPYMsnUCKmbylTSAFzxLiKvDz-Pc_pM",
+    authDomain: "music-share-95e16.firebaseapp.com",
+    projectId: "music-share-95e16",
+
+}
+
+firebase.initializeApp(config)
+
+const firestore = firebase.firestore();
+const settings = {/* your settings... */ timestampsInSnapshots: true};
+firestore.settings(settings);
+
+//initialize firestore with persistence
+firestore.enablePersistence()
+.then((res)=>{
+
+    console.log(res)
+
+})
+
+.catch(function(err) {
+    if (err.code == 'failed-precondition') {
+        // Multiple tabs open, persistence can only be enabled
+        // in one tab at a a time.
+        // ...
+    } else if (err.code == 'unimplemented') {
+        // The current browser does not support all of the
+        // features required to enable persistence
+        // ...
+    }
+});
 
 
+export function signUp(email, password){
 
-export function signUp(username, password){
+    firebase.auth().createUserWithEmailAndPassword(email, password)
 
-    userDB.signUp(username, password)
-    .then(res => console.log('Account created for ' + JSON.stringify(res)))
-    .catch(error => console.log(error))
+    .then(res=>console.log(res))
+    
+    .catch(function(error) {
+        // Handle Errors here.
+        console.log(error)
+        // ...
+      });
 
 }
 
 export function signIn(username, password){
 
-    userDB.logIn(username, password)
-    .then(res => console.log(res))
-    .catch(error => console.log(error))
+    // userDB.logIn(username, password)
+    // .then(res => console.log(res))
+    // .catch(error => console.log(error))
 
 }
 
 export function signOut(){
 
-    remoteDB.logOut()
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
+    // userDB.logOut()
+    // .then(res=>console.log(res))
+    // .catch(err=>console.log(err))
 }
 
 //get info about dbs
 export function getDBInfo(){
 
-    localDB.info()
-    .then((info)=>{
+    // localDB.info()
+    // .then((info)=>{
 
-        console.log("Info from local database -" + info)
-    })
+    //     console.log("Info from local database -" + info)
+    // })
 
 }
 
 //sync localDB with remoteDB
 export function syncDBs(){
 
-    localDB.sync(remoteDB, {live: true, retry: true})
-    .on('error', console.log.bind(console))
+    // localDB.sync(userDB, {live: true, retry: true})
+    // .on('error', console.log.bind(console))
 }
 
 //get all music
 export function getAllMusic(){
 
-    localDB.allDocs({include_docs:true})
-    .then((allDocs)=> {
+    // localDB.allDocs({include_docs:true})
+    // .then((allDocs)=> {
 
-        console.log(allDocs)
-        syncDBs()
-    })
+    //     console.log(allDocs)
+    //     syncDBs()
+    // })
 
-    .catch(err=>console.log(err))
+    // .catch(err=>console.log(err))
 
 }
 
@@ -67,18 +102,18 @@ export function getAllMusic(){
 export function saveMusic(music){
 
     
-    let doc = {
+    // let doc = {
 
-        "data": music
-    };
+    //     "data": music
+    // };
 
-     userDB.post(doc)
-    .then((res)=>{
+    //  userDB.post(doc)
+    // .then((res)=>{
 
-        console.log(res)
-        syncDBs()
-    })
+    //     console.log(res)
+    //     syncDBs()
+    // })
 
-    .catch((err)=>console.log(err))
+    // .catch((err)=>console.log(err))
 
 }

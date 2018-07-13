@@ -49,7 +49,7 @@ form{
     flex-direction:column;
 }
 
-input[name="email"], input[name="pass"], input[name="user"]{
+input[name="email"], input[name="pass"]{
 
     padding: 15px 15px;
     margin: 8px 0;
