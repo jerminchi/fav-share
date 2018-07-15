@@ -23,7 +23,8 @@ export default function songReducer(state = initialState, action){
                 console.log(action)
 
                 return{
-                    ...state
+                    ...state,
+                    data:state.data.concat(action.payload)
                 }
             
 

@@ -11,7 +11,7 @@ class Signin extends Component{
 
         this.state={
 
-            user:"",
+            email:"",
             pass: "",
             redirect:false
 
@@ -37,11 +37,11 @@ class Signin extends Component{
         //credentials for user
           let user = {
 
-            name:this.state.user,
+            email:this.state.email,
             password: this.state.pass
           }
 
-          signIn(user.name, user.password)
+          signIn(user.email, user.password)
 
 
           this.setState({redirect:true})
@@ -66,7 +66,7 @@ class Signin extends Component{
                 <form
                   onSubmit={this.handleSubmit}>
         
-                  <input type="text" name="user" placeholder="Username" value={this.state.email}  onChange={this.handleChange}/>
+                  <input type="email" name="email" placeholder="Username" value={this.state.email}  onChange={this.handleChange}/>
         
                   <input type="password" name="pass" placeholder="Password" value={this.state.pass}  onChange={this.handleChange}/>
                   

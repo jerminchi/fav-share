@@ -12,17 +12,14 @@ let config = {
 
 firebase.initializeApp(config)
 
-const firestore = firebase.firestore();
+const firestore = firebase.firestore()
+const auth = firebase.auth()
 const settings = {/* your settings... */ timestampsInSnapshots: true};
-firestore.settings(settings);
+//a ref to our user
+firestore.settings(settings)
 
 //initialize firestore with persistence
 firestore.enablePersistence()
-.then((res)=>{
-
-    console.log(res)
-
-})
 
 .catch(function(err) {
     if (err.code == 'failed-precondition') {
@@ -36,10 +33,32 @@ firestore.enablePersistence()
     }
 });
 
+    export function getUser(){ 
+    
+    return new Promise((resolve, reject)=>{
+
+        auth.onAuthStateChanged((user)=>{
+
+            if(user){
+
+                resolve(user)
+            }
+
+            else{
+
+                reject(Error('Not signed in'))
+            }
+        })
+    
+        
+    })
+
+}
+
 
 export function signUp(email, password){
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    auth().createUserWithEmailAndPassword(email, password)
 
     .then(res=>console.log(res))
     
@@ -51,11 +70,18 @@ export function signUp(email, password){
 
 }
 
-export function signIn(username, password){
+export function signIn(email, password){
 
-    // userDB.logIn(username, password)
-    // .then(res => console.log(res))
-    // .catch(error => console.log(error))
+    firebase.auth().signInWithEmailAndPassword(email, password)
+
+    .then(res=>console.log(res))
+    
+    .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
 
 }
 
@@ -66,54 +92,35 @@ export function signOut(){
     // .catch(err=>console.log(err))
 }
 
-//get info about dbs
-export function getDBInfo(){
-
-    // localDB.info()
-    // .then((info)=>{
-
-    //     console.log("Info from local database -" + info)
-    // })
-
-}
-
-//sync localDB with remoteDB
-export function syncDBs(){
-
-    // localDB.sync(userDB, {live: true, retry: true})
-    // .on('error', console.log.bind(console))
-}
 
 //get all music
-export function getAllMusic(){
+export function getAllMusic(user){
 
-    // localDB.allDocs({include_docs:true})
-    // .then((allDocs)=> {
+    console.log(user)
+    let docRef = firestore.collection(user)
+    return docRef.get({source:'server'})
 
-    //     console.log(allDocs)
-    //     syncDBs()
-    // })
-
-    // .catch(err=>console.log(err))
+    
 
 }
 
 //save music
 export function saveMusic(music){
 
+    let stuff = {
+
+        data:music
+    }
+
+    firestore.collection(auth.currentUser.uid)
+    .add(stuff)
+    .then(()=>console.log(music))
+
+
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+
     
-    // let doc = {
-
-    //     "data": music
-    // };
-
-    //  userDB.post(doc)
-    // .then((res)=>{
-
-    //     console.log(res)
-    //     syncDBs()
-    // })
-
-    // .catch((err)=>console.log(err))
 
 }

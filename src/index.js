@@ -12,7 +12,7 @@ import reducers from './reducers'
 
 import App from './App';
 import Search from './components/Search/Search'
-import Library from './components/Collection/Library'
+import Collection from './components/Collection/Collection'
 
 
 const store = createStore(
@@ -29,7 +29,7 @@ ReactDOM.render(<Provider store={store}>
     <Switch>
     <Route  exact path="/" component={App} />
     <Route path="/search" component={Search} />
-    <Route path="/library" component={Library} />
+    <Route path="/collection" component={Collection} />
 
     </Switch>
       </Router>

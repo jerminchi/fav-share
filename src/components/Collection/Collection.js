@@ -4,7 +4,7 @@ import '../Search/search.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
-import { getSavedMusic } from '../../actions/index'
+import { getSavedMusic, signUserIn } from '../../actions/index'
 
 
 class Collection extends Component{
@@ -17,24 +17,28 @@ class Collection extends Component{
 
             componentDidMount(){
 
+                this.props.fireUser()
                 this.props.getAllSongs()
             }
 
 
             render(){
-                const { addedSongs } = this.props 
+                const { addedSongs, fireUser} = this.props
+                console.log(this.props)
 
                 return(
 
-            <div className="collection-container">
+                <div className="collection-container">
 
                 <Header />
                 <h1>Jermaine's Music</h1>
                 
-                <div className="album-info-container">
+                 <div className="album-info-container">
 
                     
-                    {addedSongs.data.map((data, i)=>{ //map over the data
+                    {/* {addedSongs.data.docs.map((doc, i)=>{ //map over the data
+
+                        const info = doc.data().data
 
                     return(
 
@@ -43,16 +47,16 @@ class Collection extends Component{
                          key={i}>
 
                     <img 
-                    src={data.artworkUrl100}
+                    src={info.artworkUrl100}
                     alt="Album art"
                     className="placeholder" />
 
                     <div className="album-info">
-                    <p>Album: {data.collectionName}</p>
-                    <p>Artist: {data.artistName}</p>
-                    <p>Year: {data.releaseDate.slice(0,4)}</p>
+                    <p>Album: {info.collectionName}</p>
+                    <p>Artist: {info.artistName}</p>
+                    <p>Year: {info.releaseDate.slice(0,4)}</p>
                     
-                    <a href={data.trackViewUrl} target="_blank">Preview Track</a>
+                    <a href={info.trackViewUrl} target="_blank">Preview Track</a>
 
                     </div>
 
@@ -60,10 +64,10 @@ class Collection extends Component{
 
                         )
 
-                    })}
+                    })} */}
 
                 </div>
-                
+                 
                     
 
                     
@@ -75,9 +79,13 @@ class Collection extends Component{
 
              function mapStateToProps(state){
 
+                console.log(state)
+
                 return{
 
-                    addedSongs:state.songs
+                    addedSongs:state.songs,
+                    signedUser: state.user
+
                 }
              }
 
@@ -85,7 +93,8 @@ class Collection extends Component{
 
                 return{
 
-                    getAllSongs: ()=> dispatch(getSavedMusic())
+                    fireUser: () => dispatch(signUserIn()),
+                    getAllSongs: () => dispatch(getSavedMusic())
                 }
              }
 
