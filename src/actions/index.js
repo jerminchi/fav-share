@@ -1,5 +1,5 @@
 import { ADD_SONG, DELETE_SONG, SHARE_SONG, GET_ALL_SONGS, SIGNED_IN, SIGNED_OUT } from './types'
-import { saveMusic, getAllMusic, getUser } from '../db/dbHelpers'
+import { saveMusic, getAllMusic, signIn } from '../db/dbHelpers'
 
 
 export function addSong(name){
@@ -10,10 +10,10 @@ export function addSong(name){
     } 
 }
 
-export function getSavedMusic(){
+export function getSavedMusic(user){
 
     console.log('getting all saved songs')
-
+    console.log(user)
 
     return(dispatch)=>{
 
@@ -30,16 +30,24 @@ export function getSavedMusic(){
     }
 }
 
-export function signUserIn(){
+export function signUserIn(email, password){
 
     console.log('signing in')
 
     return(dispatch)=>{
 
-        getUser()
-
-        .then(res => dispatch({type:SIGNED_IN, payload:res}))
+       
+        signIn(email, password)
+        .then(res => {
+            
+            localStorage.setItem('userData', JSON.stringify(res))
+             //save user info to localstorage
+    
+        /* Be sure to delete user info on signOut*/
+            dispatch({type:SIGNED_IN,payload:res})
+    
+         })
         
-        .catch(err=>console.log('Error fetching user'))
+        .catch(err => console.log('Error fetching user'))
     }
 }

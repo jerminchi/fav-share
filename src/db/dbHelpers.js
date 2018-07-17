@@ -33,27 +33,32 @@ firestore.enablePersistence()
     }
 });
 
-    export function getUser(){ 
+//     export function getUser(){ 
     
-    return new Promise((resolve, reject)=>{
+//     return new Promise((resolve, reject)=>{
 
-        auth.onAuthStateChanged((user)=>{
+//         auth.onAuthStateChanged((user)=>{
 
-            if(user){
+//             if(user){
 
-                resolve(user)
-            }
+//               resolve(user)   
+//             }
 
-            else{
+//             else{
 
-                reject(Error('Not signed in'))
-            }
-        })
+//                 reject(Error('Not signed in'))
+//             }
+
+
+            
+//         })
+
     
         
-    })
+//     })
 
-}
+
+// }
 
 
 export function signUp(email, password){
@@ -72,16 +77,10 @@ export function signUp(email, password){
 
 export function signIn(email, password){
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    return firebase.auth().signInWithEmailAndPassword(email, password)
 
-    .then(res=>console.log(res))
     
-    .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
+    
 
 }
 
@@ -97,7 +96,7 @@ export function signOut(){
 export function getAllMusic(user){
 
     console.log(user)
-    let docRef = firestore.collection(user)
+    let docRef = firestore.collection(auth.currentUser.uid)
     return docRef.get({source:'server'})
 
     

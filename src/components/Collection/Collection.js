@@ -4,7 +4,9 @@ import '../Search/search.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
-import { getSavedMusic, signUserIn } from '../../actions/index'
+import { getSavedMusic} from '../../actions/index'
+
+import firebase from 'firebase'
 
 
 class Collection extends Component{
@@ -12,19 +14,33 @@ class Collection extends Component{
             constructor(props){
 
                 super(props)
+
+                this.state = {
+
+                    user:null
+                }
                 
             }
 
+            //need to store user in localStorage
+
+            //or use fire auth globally and store item
             componentDidMount(){
 
-                this.props.fireUser()
-                this.props.getAllSongs()
+                firebase.auth().onAuthStateChanged((user) => {
+                    if (user) {
+                      this.setState({ user });
+                    } 
+                  });
+                
+                getSavedMusic(this.state.user)
             }
 
 
             render(){
-                const { addedSongs, fireUser} = this.props
-                console.log(this.props)
+                // const { addedSongs, fireUser} = this.props
+                // console.log(this.props)
+                console.log(this.state.user)
 
                 return(
 
@@ -32,7 +48,7 @@ class Collection extends Component{
 
                 <Header />
                 <h1>Jermaine's Music</h1>
-                
+                   
                  <div className="album-info-container">
 
                     
@@ -79,7 +95,6 @@ class Collection extends Component{
 
              function mapStateToProps(state){
 
-                console.log(state)
 
                 return{
 
@@ -93,7 +108,6 @@ class Collection extends Component{
 
                 return{
 
-                    fireUser: () => dispatch(signUserIn()),
                     getAllSongs: () => dispatch(getSavedMusic())
                 }
              }

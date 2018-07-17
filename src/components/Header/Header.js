@@ -9,7 +9,7 @@ const Header = (props) => (
         
         <ul>
             <Link to={{pathname:'/search'}}><li>Search</li></Link>
-            <Link to={{pathname:'/library'}}><li>Library</li></Link>
+            <Link to={{pathname:'/collection'}}><li>Library</li></Link>
             <Link to={{pathname:'/'}}><li onClick={signOut}>SignOut</li></Link>
 
         </ul>

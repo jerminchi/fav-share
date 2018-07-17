@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { signIn } from '../../db/dbHelpers'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { signUserIn } from '../../actions/index'
 
 
 class Signin extends Component{
@@ -41,10 +42,14 @@ class Signin extends Component{
             password: this.state.pass
           }
 
-          signIn(user.email, user.password)
+          this.props.getUser(user.email, user.password)
 
 
           this.setState({redirect:true})
+
+    
+
+
 
         }
 
@@ -82,4 +87,13 @@ class Signin extends Component{
           }
 }
 
-export default Signin
+function mapDispatchToProps(dispatch){
+
+  return{
+
+    getUser: (email, password) =>
+    dispatch(signUserIn(email, password))
+  }
+
+}
+export default connect (null, mapDispatchToProps)(Signin)
