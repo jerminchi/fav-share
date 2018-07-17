@@ -4,7 +4,7 @@ import '../Search/search.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
-import { getSavedMusic} from '../../actions/index'
+import { getSavedMusic, signUserIn, getUser } from '../../actions/index'
 
 import firebase from 'firebase'
 
@@ -14,33 +14,21 @@ class Collection extends Component{
             constructor(props){
 
                 super(props)
-
-                this.state = {
-
-                    user:null
-                }
                 
             }
 
-            //need to store user in localStorage
-
-            //or use fire auth globally and store item
             componentDidMount(){
 
-                firebase.auth().onAuthStateChanged((user) => {
-                    if (user) {
-                      this.setState({ user });
-                    } 
-                  });
-                
-                getSavedMusic(this.state.user)
+        
+                this.props.getAllSongs(JSON.parse(localStorage.getItem('userData')))
+
             }
 
-
             render(){
-                // const { addedSongs, fireUser} = this.props
-                // console.log(this.props)
-                console.log(this.state.user)
+                const { addedSongs, fireUser} = this.props
+
+                console.log(this.props)
+                // {this.props.addedSongs.data.docs.map(stuff=>console.log(stuff))}
 
                 return(
 
@@ -51,11 +39,13 @@ class Collection extends Component{
                    
                  <div className="album-info-container">
 
-                    
-                    {/* {addedSongs.data.docs.map((doc, i)=>{ //map over the data
+                        {console.log(this.props.addedSongs.data)}
 
-                        const info = doc.data().data
+                      
+                        
+                     {addedSongs.data.map((doc, i)=>{ //map over the data
 
+                        const info = doc.data
                     return(
 
                     <div 
@@ -80,8 +70,7 @@ class Collection extends Component{
 
                         )
 
-                    })} */}
-
+                    })} 
                 </div>
                  
                     
@@ -108,7 +97,8 @@ class Collection extends Component{
 
                 return{
 
-                    getAllSongs: () => dispatch(getSavedMusic())
+                    dispatchSignIn: () => dispatch(getUser()),
+                    getAllSongs: (user) => dispatch(getSavedMusic(user))
                 }
              }
 

@@ -1,5 +1,5 @@
-import { ADD_SONG, DELETE_SONG, SHARE_SONG, GET_ALL_SONGS, SIGNED_IN, SIGNED_OUT } from './types'
-import { saveMusic, getAllMusic, signIn } from '../db/dbHelpers'
+import { ADD_SONG, DELETE_SONG, SHARE_SONG, GET_ALL_SONGS, SIGNED_IN, SIGNED_OUT, GET_CURRENT_USER } from './types'
+import { saveMusic, getAllMusic, signIn, getCurrentUser } from '../db/dbHelpers'
 
 
 export function addSong(name){
@@ -14,12 +14,25 @@ export function getSavedMusic(user){
 
     console.log('getting all saved songs')
     console.log(user)
+    //array for music
+    let musicArr = []
 
     return(dispatch)=>{
 
-        getAllMusic()
+        getAllMusic(user)
 
-        .then(querySnap=> dispatch({type:GET_ALL_SONGS, payload:querySnap}))
+
+        .then(querySnap=> {
+
+            querySnap.docs.map(docs=>{
+
+                musicArr.push(docs.data())
+            })
+
+            
+            dispatch({type:GET_ALL_SONGS, payload:musicArr})
+        
+        })
             // querySnap.docs.map((doc => doc.data().data)) 
             
         .catch(function(error) {
@@ -50,4 +63,16 @@ export function signUserIn(email, password){
         
         .catch(err => console.log('Error fetching user'))
     }
+}
+
+export function getUser(){
+
+    console.log('getting current user')
+
+    return(dispatch)=>{
+
+        getCurrentUser()
+        .then(res => console.log(res))
+    }
+
 }

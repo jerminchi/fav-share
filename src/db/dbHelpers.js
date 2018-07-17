@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import 'firebase/firestore'
+import { resolve } from 'path';
 
 /* toDo: put credentials in separate config file */
 // Initialize Firebase
@@ -76,11 +77,26 @@ export function signUp(email, password){
 }
 
 export function signIn(email, password){
+        
 
     return firebase.auth().signInWithEmailAndPassword(email, password)
+ 
 
+}
+
+export function getCurrentUser(){
+
+    //need to store user in localStorage
+
+     //or use fire auth globally and store item
+
+    return new Promise((resolve)=>{
+
+        resolve( JSON.parse(localStorage.getItem('userData')))
+
+    })
     
-    
+   
 
 }
 
@@ -95,8 +111,7 @@ export function signOut(){
 //get all music
 export function getAllMusic(user){
 
-    console.log(user)
-    let docRef = firestore.collection(auth.currentUser.uid)
+    let docRef = firestore.collection(user.user.uid)
     return docRef.get({source:'server'})
 
     
