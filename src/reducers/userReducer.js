@@ -17,7 +17,6 @@ export default function userReducer(state = initialState, action){
                 }
 
         case 'GET_CURRENT_USER':
-
                 return{
 
                     ...state,

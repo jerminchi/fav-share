@@ -128,7 +128,7 @@ export function saveMusic(music){
 
     firestore.collection(auth.currentUser.uid)
     .add(stuff)
-    .then(()=>console.log(music))
+    .then((hey)=>console.log(hey))
 
 
     .catch(function(error) {

@@ -13,7 +13,6 @@ export function addSong(name){
 export function getSavedMusic(user){
 
     console.log('getting all saved songs')
-    console.log(user)
     //array for music
     let musicArr = []
 
@@ -72,7 +71,7 @@ export function getUser(){
     return(dispatch)=>{
 
         getCurrentUser()
-        .then(res => console.log(res))
+        .then(res => dispatch({type:GET_CURRENT_USER, payload:res}))
     }
 
 }

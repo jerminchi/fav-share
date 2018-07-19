@@ -4,9 +4,7 @@ import '../Search/search.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
-import { getSavedMusic, signUserIn, getUser } from '../../actions/index'
-
-import firebase from 'firebase'
+import { getSavedMusic, getUser } from '../../actions/index'
 
 
 class Collection extends Component{
@@ -21,14 +19,13 @@ class Collection extends Component{
 
         
                 this.props.getAllSongs(JSON.parse(localStorage.getItem('userData')))
+                this.props.dispatchSignIn()
 
             }
 
             render(){
                 const { addedSongs, fireUser} = this.props
 
-                console.log(this.props)
-                // {this.props.addedSongs.data.docs.map(stuff=>console.log(stuff))}
 
                 return(
 
@@ -38,8 +35,6 @@ class Collection extends Component{
                 <h1>Jermaine's Music</h1>
                    
                  <div className="album-info-container">
-
-                        {console.log(this.props.addedSongs.data)}
 
                       
                         
@@ -87,8 +82,7 @@ class Collection extends Component{
 
                 return{
 
-                    addedSongs:state.songs,
-                    signedUser: state.user
+                    addedSongs:state.songs
 
                 }
              }
