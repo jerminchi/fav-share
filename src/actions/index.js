@@ -29,7 +29,6 @@ export function getSavedMusic(user){
                 musicArr.push(doc.data().data)
             })
             
-            
             dispatch({type:GET_ALL_SONGS, payload:musicArr})
         
         })

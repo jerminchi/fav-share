@@ -17,13 +17,17 @@ class Collection extends Component{
 
             componentDidMount(){
 
+                
+                console.log(this.props.addedSongs.data.length)
+
                 this.props.getAllSongs(JSON.parse(localStorage.getItem('userData')))
-                this.props.dispatchSignIn()
+                // this.props.dispatchSignIn()
 
             }
 
             render(){
                 const { addedSongs, fireUser} = this.props
+                console.log(this.props.addedSongs.data.length)
 
                console.log(this.props)
                 return(
