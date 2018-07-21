@@ -34,7 +34,7 @@ searchMusic = (e) =>{
 
 getMusic(music){ //get music from itunes API
 
-  return axios.get(`${URL}${music}&media=music&limit=25`)
+  return axios.get(`${URL}${music}&media=music&limit=24`)
 
   .then((res) =>{
       

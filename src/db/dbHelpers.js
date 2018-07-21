@@ -1,6 +1,5 @@
 import firebase from 'firebase'
 import 'firebase/firestore'
-import { resolve } from 'path';
 
 /* toDo: put credentials in separate config file */
 // Initialize Firebase

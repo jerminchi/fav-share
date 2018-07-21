@@ -26,56 +26,51 @@ class Collection extends Component{
             render(){
                 const { addedSongs, fireUser} = this.props
 
-
+               
                 return(
 
                 <div className="collection-container">
 
-                <Header />
-                <h1>Jermaine's Music</h1>
-                   
-                 <div className="album-info-container">
+                    <Header />
+                    <h1>Jermaine's Music</h1>
 
-                      
-                        
-                     {addedSongs.data.map((doc, i)=>{ //map over the data
+                    <div className="album-info-container">
+                       {addedSongs.data.map((doc, i)=>{ //map over the data
+                        const info = doc.data().data
 
-                        const info = doc.data
-                    return(
+                            return(
 
-                    <div 
-                        className="album-info-row"
-                         key={i}>
+                            <div 
+                            className="album-info-row"
+                            key={i}>
 
-                    <img 
-                    src={info.artworkUrl100}
-                    alt="Album art"
-                    className="placeholder" />
+                                <img 
+                                src={info.artworkUrl100}
+                                alt="Album art"
+                                className="placeholder" />
 
-                    <div className="album-info">
-                    <p>Album: {info.collectionName}</p>
-                    <p>Artist: {info.artistName}</p>
-                    <p>Year: {info.releaseDate.slice(0,4)}</p>
-                    
-                    <a href={info.trackViewUrl} target="_blank">Preview Track</a>
+                                <div className="album-info">
+                                <p>Album: {info.collectionName}</p>
+                                <p>Artist: {info.artistName}</p>
+                                <p>Year: {info.releaseDate.slice(0,4)}</p>
+                                
+                                <a href={info.trackViewUrl} target="_blank">Preview Track</a>
 
-                    </div>
+                                </div>
+                            </div>
 
-                    </div>
-
-                        )
+                         )
 
                     })} 
-                </div>
-                 
-                    
 
-                    
+                </div>
+ 
             </div>
+
                 )
             }
         
-             }
+    }
 
              function mapStateToProps(state){
 
