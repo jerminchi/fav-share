@@ -1,5 +1,5 @@
 import { ADD_SONG, DELETE_SONG, SHARE_SONG, GET_ALL_SONGS, SIGNED_IN, SIGNED_OUT, GET_CURRENT_USER } from './types'
-import { saveMusic, getAllMusic, signIn, getCurrentUser } from '../db/dbHelpers'
+import { saveMusic, getAllMusic, signIn, getCurrentUser, deleteMusic } from '../db/dbHelpers'
 
 
 export function addSong(name){
@@ -8,6 +8,20 @@ export function addSong(name){
         saveMusic(name)
         dispatch({type:'ADD_SONG', payload:name})
     } 
+}
+
+export function deleteSong(user, i){
+
+
+    return(dispatch)=>{
+
+        deleteMusic(user, i)
+
+        // .then(res=>console.log(res))
+    }
+    
+   
+    
 }
 
 export function getSavedMusic(user){

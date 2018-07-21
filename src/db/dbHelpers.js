@@ -83,6 +83,14 @@ export function signIn(email, password){
 
 }
 
+export function signOut(){
+
+    // userDB.logOut()
+    // .then(res=>console.log(res))
+    // .catch(err=>console.log(err))
+}
+
+
 export function getCurrentUser(){
 
     //need to store user in localStorage
@@ -99,17 +107,12 @@ export function getCurrentUser(){
 
 }
 
-export function signOut(){
-
-    // userDB.logOut()
-    // .then(res=>console.log(res))
-    // .catch(err=>console.log(err))
-}
 
 
 //get all music
 export function getAllMusic(user){
 
+    console.log(user)
     let docRef = firestore.collection(user.user.uid)
     return docRef.get({source:'server'})
 
@@ -136,4 +139,22 @@ export function saveMusic(music){
 
     
 
+}
+
+//delete music
+export function deleteMusic(user, i){
+
+    console.log(user)
+    console.log(i)
+
+    let storeRef = firestore.collection(user.user.uid)
+    storeRef.get()
+
+    .then((res)=>{
+
+        let docRef = res.docs[i].id
+        storeRef.doc(docRef).delete()
+        
+    })
+        
 }

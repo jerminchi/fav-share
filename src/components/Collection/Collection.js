@@ -4,7 +4,7 @@ import '../Search/search.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
-import { getSavedMusic, getUser } from '../../actions/index'
+import { getSavedMusic, deleteSong, getUser } from '../../actions/index'
 
 
 class Collection extends Component{
@@ -17,19 +17,16 @@ class Collection extends Component{
 
             componentDidMount(){
 
-                
-                console.log(this.props.addedSongs.data.length)
-
-                this.props.getAllSongs(JSON.parse(localStorage.getItem('userData')))
-                // this.props.dispatchSignIn()
+                this.props.dispatchAllSongs(JSON.parse(localStorage.getItem('userData')))
+                this.props.dispatchSignIn()
 
             }
 
+             
+
             render(){
                 const { addedSongs, fireUser} = this.props
-                console.log(this.props.addedSongs.data.length)
 
-               console.log(this.props)
                 return(
 
                 <div className="collection-container">
@@ -39,10 +36,11 @@ class Collection extends Component{
 
                     <div className="album-info-container">
                        {addedSongs.data.map((doc, i)=>{ //map over the data
-
+                            
                             return(
 
                             <div 
+                            key={i}
                             className="album-info-row">
 
                                 <img 
@@ -51,11 +49,17 @@ class Collection extends Component{
                                 className="placeholder" />
 
                                 <div className="album-info">
-                                <p>Album: {doc.collectionName}</p>
-                                <p>Artist: {doc.artistName}</p>
-                                <p>Year: {doc.releaseDate.slice(0,4)}</p>
+                                <p>Album:{doc.collectionName}</p>
+                                <p>Artist:{doc.artistName}</p>
+                                <p>Year:{doc.releaseDate.slice(0,4)}</p>
                                 
                                 <a href={doc.trackViewUrl} target="_blank">Preview Track</a>
+                                <button>Share Track</button>
+                                <button
+                                onClick={() =>this.props.dispatchDelete(JSON.parse(localStorage.getItem('userData')), i)}
+                                >Delete Track</button>
+
+
 
                                 </div>
                             </div>
@@ -86,9 +90,10 @@ class Collection extends Component{
              function mapDispatchToProps(dispatch){
 
                 return{
-
                     dispatchSignIn: () => dispatch(getUser()),
-                    getAllSongs: (user) => dispatch(getSavedMusic(user))
+                    dispatchAllSongs: (user) => dispatch(getSavedMusic(user)),
+                    dispatchDelete: (user, index) => dispatch(deleteSong(user, index))
+
                 }
              }
 
