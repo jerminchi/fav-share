@@ -49,7 +49,6 @@ getMusic(music){ //get music from itunes API
 addToLibrary = (data)=>{ // adds the music to your array in state
 
     
-    console.log(data)
     this.props.dispatchSong(data)
 }
 

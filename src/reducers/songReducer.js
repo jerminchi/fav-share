@@ -29,10 +29,7 @@ export default function songReducer(state = initialState, action){
             console.log(action)
             return{
                 ...state,
-                data:[
-                    ...state.items.slice(0, action.payload),
-                    ...state.items.slice(action.payload + 1)
-                ]
+                data:action.payload
             }
 
             default:

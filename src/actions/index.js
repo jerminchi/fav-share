@@ -12,12 +12,22 @@ export function addSong(name){
 
 export function deleteSong(user, i){
 
+    let musicArr = []
 
     return(dispatch)=>{
 
         deleteMusic(user, i)
 
-        // .then(res=>console.log(res))
+        .then((res)=>{
+
+            res.docs.map((doc)=>{
+
+                musicArr.push(doc.data().data)
+                dispatch({type:DELETE_SONG, payload:musicArr})
+
+            })
+
+        })
     }
     
    

@@ -56,7 +56,7 @@ class Collection extends Component{
                                 <a href={doc.trackViewUrl} target="_blank">Preview Track</a>
                                 <button>Share Track</button>
                                 <button
-                                onClick={() =>this.props.dispatchDelete(JSON.parse(localStorage.getItem('userData')), i)}
+                                onClick={() => this.props.dispatchDelete(JSON.parse(localStorage.getItem('userData')), i)}
                                 >Delete Track</button>
 
 

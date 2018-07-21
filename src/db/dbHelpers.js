@@ -112,9 +112,8 @@ export function getCurrentUser(){
 //get all music
 export function getAllMusic(user){
 
-    console.log(user)
-    let docRef = firestore.collection(user.user.uid)
-    return docRef.get({source:'server'})
+    let storeRef = firestore.collection(user.user.uid)
+    return storeRef.get({source:'server'})
 
     
 
@@ -130,7 +129,7 @@ export function saveMusic(music){
 
     firestore.collection(auth.currentUser.uid)
     .add(stuff)
-    .then((hey)=>console.log(hey))
+    // .then((hey)=>console.log(hey))
 
 
     .catch(function(error) {
@@ -144,17 +143,18 @@ export function saveMusic(music){
 //delete music
 export function deleteMusic(user, i){
 
-    console.log(user)
     console.log(i)
-
     let storeRef = firestore.collection(user.user.uid)
-    storeRef.get()
+    return storeRef.get()
 
     .then((res)=>{
 
+        //we get the id of the document clicked
         let docRef = res.docs[i].id
+        //delete the document
         storeRef.doc(docRef).delete()
-        
+        //return collection ref
+        return storeRef.get({source:'server'})
     })
         
 }
