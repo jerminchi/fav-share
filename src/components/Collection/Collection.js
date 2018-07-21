@@ -17,7 +17,6 @@ class Collection extends Component{
 
             componentDidMount(){
 
-        
                 this.props.getAllSongs(JSON.parse(localStorage.getItem('userData')))
                 this.props.dispatchSignIn()
 
@@ -26,7 +25,7 @@ class Collection extends Component{
             render(){
                 const { addedSongs, fireUser} = this.props
 
-               
+               console.log(this.props)
                 return(
 
                 <div className="collection-container">
@@ -36,25 +35,23 @@ class Collection extends Component{
 
                     <div className="album-info-container">
                        {addedSongs.data.map((doc, i)=>{ //map over the data
-                        const info = doc.data().data
 
                             return(
 
                             <div 
-                            className="album-info-row"
-                            key={i}>
+                            className="album-info-row">
 
                                 <img 
-                                src={info.artworkUrl100}
+                                src={doc.artworkUrl100}
                                 alt="Album art"
                                 className="placeholder" />
 
                                 <div className="album-info">
-                                <p>Album: {info.collectionName}</p>
-                                <p>Artist: {info.artistName}</p>
-                                <p>Year: {info.releaseDate.slice(0,4)}</p>
+                                <p>Album: {doc.collectionName}</p>
+                                <p>Artist: {doc.artistName}</p>
+                                <p>Year: {doc.releaseDate.slice(0,4)}</p>
                                 
-                                <a href={info.trackViewUrl} target="_blank">Preview Track</a>
+                                <a href={doc.trackViewUrl} target="_blank">Preview Track</a>
 
                                 </div>
                             </div>

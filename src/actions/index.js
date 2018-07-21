@@ -23,10 +23,14 @@ export function getSavedMusic(user){
 
         .then(querySnap=> {
 
-            
+            querySnap.docs.map((doc)=>{
 
+                // console.log(doc.data().data)
+                musicArr.push(doc.data().data)
+            })
             
-            dispatch({type:GET_ALL_SONGS, payload:querySnap.docs})
+            
+            dispatch({type:GET_ALL_SONGS, payload:musicArr})
         
         })
             // querySnap.docs.map((doc => doc.data().data)) 

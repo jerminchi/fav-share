@@ -18,7 +18,7 @@ export default function songReducer(state = initialState, action){
             }
 
             case 'GET_ALL_SONGS':
-                // console.log(action.payload)
+                console.log(action.payload)
 
                 return{
                     ...state,
