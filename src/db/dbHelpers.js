@@ -63,7 +63,7 @@ firestore.enablePersistence()
 
 export function signUp(email, password){
 
-    auth().createUserWithEmailAndPassword(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
 
     .then(res=>console.log(res))
     

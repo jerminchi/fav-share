@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import './library.css'
-import '../Search/search.css'
+import './collection.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
 
@@ -22,6 +21,26 @@ class Collection extends Component{
 
             }
 
+            shareSong = (link) =>{
+
+                if(navigator.share){
+
+                    navigator.share({
+
+                        title:'Great Song',
+                        text: 'Listen to this song!',
+                        url: link
+                    })
+
+                    .then(res=>console.log(res))
+                    .catch(err=>console.log(err))
+                }
+
+                else{
+                    
+                    console.log('nope')
+                }
+            }
              
 
             render(){
@@ -54,7 +73,8 @@ class Collection extends Component{
                                 <p>Year:{doc.releaseDate.slice(0,4)}</p>
                                 
                                 <a href={doc.trackViewUrl} target="_blank">Preview Track</a>
-                                <button>Share Track</button>
+                                <button 
+                                onClick={() => this.shareSong(doc.trackViewUrl)}>Share Track</button>
                                 <button
                                 onClick={() => this.props.dispatchDelete(JSON.parse(localStorage.getItem('userData')), i)}
                                 >Delete Track</button>

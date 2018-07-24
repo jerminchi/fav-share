@@ -23,6 +23,7 @@
     align-content: center;
     margin-top:1em;
     background:#D5F11F;
+    max-width: 100%;
     width:500px;
     height:350px;
     opacity:0.8;

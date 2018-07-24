@@ -89,7 +89,7 @@ addToLibrary = (data)=>{ // adds the music to your array in state
                     <p>Year: {data.releaseDate.slice(0,4)}</p>
 
                     <button className="add-lib-btn" //adds music info to library
-                        onClick={() =>this.addToLibrary(data)}>Add to library
+                        onClick={() => this.addToLibrary(data)}>Add to library
                     </button> 
 
                     </div>

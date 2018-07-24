@@ -1,8 +1,8 @@
 
-.music-list{
+.collection-container{
 
     display:flex;
-    align-self: center;
+    flex-direction: column;
     margin:0.5em 0;
 }
 

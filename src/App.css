@@ -28,6 +28,7 @@ button{
 
   color:#fff;
   font-size: 1.3em;
+
 }
 
 .get-started{
@@ -48,66 +49,27 @@ button{
 .main-heading{
 
   font-size:5em;
-  color:rgb(224, 255, 24)
+  color:rgb(224, 255, 24);
+  text-align: center;
 }
 
 
 
-/* @media screen and (min-width:320px) {
+@media screen and (min-width:320px) {
 
   .container{
 
-    max-width: 320px;
-  }
-
-  div .header{
-
-    padding:0 0.5em;
-  }
-
-  .search-container{
-
-    grid-column: 3/3;
-    grid-row: 2/2;
-  }
-
-  input[name="search"]{
-
-    margin-top:2em;
-    max-width: 300px;
-    height:25px;
-  }
-  
-  .album-info-row{
-    display:flex;
-    flex-direction: row;
-    margin-bottom:1em;
-    max-width:100%;
-  }
-
-  .album-info{
-
-
-    display:flex;
-    flex-direction: column;
-    align-self: flex-start;
-    padding:0;
-
-  }
-
-  .library{
-
-    grid-column: 2/4;
-    grid-row:3/4;
+   background-position-x: -1000px;
   
   }
 
-  .library h1{
+  .container > p{
 
-    text-align: center;
+    font-size:1.1em;
   }
 
-} */
+  
+}
 
 /* @media screen and (min-width:375px){
 
@@ -130,17 +92,17 @@ button{
 
   
 
-}
+} */
 
-@media screen and (min-width:414px){
+/* @media screen and (min-width:414px){
 
   .container{
 
     max-width: 414px;
   }
-}
+} */
 
-@media screen and (min-width:768px){
+/* @media screen and (min-width:768px){
 
   .container{
 
@@ -154,33 +116,20 @@ button{
     margin-bottom:1em;
   }
 
-}
+} */
 
 @media screen and (min-width:1024px){
 
   .container{
 
-    max-width: 1024px;
-  }
-
-  .search-container{
-
-    grid-column: 2/2;
-    grid-row: 2/2;
-    margin-bottom:1em;
-  }
-
-  .library{
-
-  grid-column: 2/3;
-  grid-row:4/4;
+    background-position-x: 0;
   }
 
 }
 
 
 
-@media screen and (min-width: 1440px){
+/* @media screen and (min-width: 1440px){
 
   
   .container{
@@ -239,4 +188,4 @@ button{
 
   
   
-} */
+}  */
