@@ -1,6 +1,6 @@
 {
-  "homepage": "https://github.com/Ch1bi/fav-share",
-  "name": "music-playlist",
+  "homepage": "http://ch1bi.github.io/fav-share",
+  "name": "fav-share",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
