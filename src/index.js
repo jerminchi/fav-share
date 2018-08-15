@@ -3,16 +3,44 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
+import loadable from 'react-loadable'
 
 import { Provider} from 'react-redux'
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 
+const LoadingComponent = ({isLoading, error})=>{
 
-import App from './App';
-import Search from './components/Search/Search'
-import Collection from './components/Collection/Collection'
+  if(isLoading){
+
+    return<div>Sorry, unable to load the page..</div>
+  }
+
+  else{
+
+    return null;
+  }
+}
+
+const App = loadable({
+
+  loader: ()=>import('./App'),
+  loading: LoadingComponent
+})
+
+const Search = loadable({
+
+  loader: ()=>import('./components/Search/Search'),
+  loading: LoadingComponent
+})
+
+const Collection = loadable({
+
+  loader: ()=>import('./components/Collection/Collection'),
+  loading: LoadingComponent
+})
+
 
 
 const store = createStore(
