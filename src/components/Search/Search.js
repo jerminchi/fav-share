@@ -65,7 +65,9 @@ addToLibrary = (data)=>{ // adds the music to your array in state
                 name="search"
                 placeholder="search..."
                 value={this.state.text}
-                onChange={this.searchMusic}/> 
+                onChange={this.searchMusic}/>
+
+    { this.state.text.length !== 0 ? null : <p>Start typing to view music</p> }
 
                 <div className="album-info-container">
 
