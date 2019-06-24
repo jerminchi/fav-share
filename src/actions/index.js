@@ -1,5 +1,5 @@
 import { ADD_SONG, DELETE_SONG, SHARE_SONG, GET_ALL_SONGS, SIGNED_IN, SIGNED_OUT, GET_CURRENT_USER } from './types'
-import { saveMusic, getAllMusic, signIn, getCurrentUser, deleteMusic } from '../db/dbHelpers'
+import { saveMusic, getAllMusic, signIn, getCurrentUser, deleteMusic } from '../server/db/dbHelpers';
 
 
 export function addSong(name){
@@ -10,24 +10,25 @@ export function addSong(name){
     } 
 }
 
-export function deleteSong(user, i){
+export function deleteSong(user, index){
 
     let musicArr = []
 
     return(dispatch)=>{
 
-        deleteMusic(user, i)
+        deleteMusic(user, index)
 
         .then((res)=>{
 
-            res.docs.map((doc)=>{
+            res.docs.map((doc) => {
 
                 musicArr.push(doc.data().data)
-                dispatch({type:DELETE_SONG, payload:musicArr})
-
             })
+            dispatch({type:DELETE_SONG, payload:musicArr})
 
         })
+
+        .catch(err => console.log(err));
     }
     
    
@@ -49,14 +50,12 @@ export function getSavedMusic(user){
 
             querySnap.docs.map((doc)=>{
 
-                // console.log(doc.data().data)
                 musicArr.push(doc.data().data)
             })
             
             dispatch({type:GET_ALL_SONGS, payload:musicArr})
         
         })
-            // querySnap.docs.map((doc => doc.data().data)) 
             
         .catch(function(error) {
             console.log("Error getting documents:", error);
@@ -72,7 +71,6 @@ export function signUserIn(email, password){
 
     return(dispatch)=>{
 
-       
         signIn(email, password)
         .then(res => {
             

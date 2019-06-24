@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { signUp } from '../../db/dbHelpers'
+import React, { Component } from 'react';
+import { signUp } from '../../server/db/dbHelpers';
 
 class Signup extends Component{
 

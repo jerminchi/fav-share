@@ -2,59 +2,48 @@ import React, { Component } from 'react'
 import './collection.css'
 import Header from '../Header/Header'
 import { connect } from 'react-redux'
-
 import { getSavedMusic, deleteSong, getUser } from '../../actions/index'
 
 
 class Collection extends Component{
 
-            constructor(props){
-
-                super(props)
-                
-            }
-
             componentDidMount(){
 
                 this.props.dispatchAllSongs(JSON.parse(localStorage.getItem('userData')))
                 this.props.dispatchSignIn()
-
             }
 
             shareSong = (link) =>{
 
-                if(navigator.share){
 
                     navigator.share({
 
                         title:'Great Song',
                         text: 'Listen to this song!',
                         url: link
+                
+
+                    .then(res => console.log(res))
+                    .catch(err => console.log(err))
                     })
 
-                    .then(res=>console.log(res))
-                    .catch(err=>console.log(err))
-                }
-
-                else{
-                    
-                    console.log('nope')
-                }
+              
             }
              
 
             render(){
-                const { addedSongs, fireUser} = this.props
+                console.log(this.props)
 
+                const { addedSongs, fireUser} = this.props
                 return(
 
                 <div className="collection-container">
 
                     <Header />
-                    <h1>Jermaine's Music</h1>
+                    <h1>All Music</h1>
 
                     <div className="album-info-container">
-                       {addedSongs.data.map((doc, i)=>{ //map over the data
+                       { addedSongs.data.map((doc, i)=>{ //map over the data
                             
                             return(
 
@@ -72,9 +61,11 @@ class Collection extends Component{
                                 <p>Artist:{doc.artistName}</p>
                                 <p>Year:{doc.releaseDate.slice(0,4)}</p>
                                 
-                                <a href={doc.trackViewUrl} target="_blank">Preview Track</a>
-                                <button 
-                                onClick={() => this.shareSong(doc.trackViewUrl)}>Share Track</button>
+                                <a href={doc.trackViewUrl} target="_blank" rel="noopener noreferrer">Preview Track</a>
+                               {
+                                   navigator.share ? <button 
+                                   onClick={() => this.shareSong(doc.trackViewUrl)}>Share Track</button> : null
+                                } 
                                 <button
                                 onClick={() => this.props.dispatchDelete(JSON.parse(localStorage.getItem('userData')), i)}
                                 >Delete Track</button>
@@ -94,13 +85,12 @@ class Collection extends Component{
 
                 )
             }
-        
     }
 
              function mapStateToProps(state){
 
 
-                return{
+                return {
 
                     addedSongs:state.songs
 
